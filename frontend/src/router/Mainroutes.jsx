@@ -20,7 +20,6 @@ export const Mainroutes = () => {
         <Route path="/" element={<Home />}></Route>
         <Route path="/products" element={<ProductPage />}></Route>
         <Route path="/products/productdetails/:id" element={<ProductDetails />}></Route>
-
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<UserDetails />}></Route>
         <Route path="/otp" element={<Otp />}></Route>

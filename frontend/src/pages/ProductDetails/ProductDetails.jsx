@@ -37,7 +37,7 @@ export const ProductDetails = () => {
   const alert = useAlert();
   useEffect(() => {
     axios
-      .get("https://bigbasketclon.herokuapp.com/BigBasket/product")
+      .get("http://localhost:8080/BigBasket/product")
       .then(({ data }) => {
         // console.log("data", data.data);
         let prodDet = data.data.filter((elem) => elem._id === id)[0];
@@ -141,7 +141,7 @@ export const ProductDetails = () => {
               className={styled.atag}
               href=""
             >
-              Fresho
+              {productDetail.Brand}
             </a>
             <hr style={{ borderBottom: "1px solid gray" }} />
             <h1
@@ -151,7 +151,7 @@ export const ProductDetails = () => {
                 fontFamily: "sans-serif",
               }}
             >
-              {productDetail.Brand}
+              {productDetail.Title}
             </h1>
             <p
               style={{

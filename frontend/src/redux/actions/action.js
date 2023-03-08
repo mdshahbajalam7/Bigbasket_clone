@@ -53,7 +53,7 @@ const AddProductToCart = (data) => ({
 //get the products data
 export const GetProductsData = (payload, alert) => (dispatch) => {
     axios({
-        url: 'https://bigbasketclon.herokuapp.com/BigBasket/product',
+        url: 'http://localhost:8080/BigBasket/product',
         method: "GET",
         params: { ...payload },
         withCredentials: true
@@ -75,7 +75,7 @@ export const GetProductsData = (payload, alert) => (dispatch) => {
 export const GetCartData = (payload, alert) => (dispatch) => {
     console.log("called");
     axios({
-        url: 'https://bigbasketclon.herokuapp.com/BigBasket/cart',
+        url: 'http://localhost:8080/BigBasket/cart',
         method: "GET",
         withCredentials: true
     })
@@ -90,7 +90,7 @@ export const GetCartData = (payload, alert) => (dispatch) => {
 
 export const LoginByMobile = (payload) => (dispatch) => {
     console.log(payload);
-    axios.post('https://bigbasketclon.herokuapp.com/BigBasket/login', payload, { withCredentials: true })
+    axios.post('http://localhost:8080/BigBasket/login', payload, { withCredentials: true })
         .then((res) => {
             console.log(res.data);
             dispatch(Login(res.data))
@@ -102,7 +102,7 @@ export const LoginByMobile = (payload) => (dispatch) => {
 // Register
 export const NewUserRegistration = (payload) => (dispatch) => {
     console.log(payload);
-    axios.post('https://bigbasketclon.herokuapp.com/BigBasket/signup', payload, { withCredentials: true })
+    axios.post('http://localhost:8080/BigBasket/signup', payload, { withCredentials: true })
         .then((res) => {
             console.log(res.data);
             dispatch(Register(res.data))
@@ -112,7 +112,7 @@ export const NewUserRegistration = (payload) => (dispatch) => {
 }
 
 export const OtpVerification = (payload, alert, navigate) => (dispatch) => {
-    axios.post('https://bigbasketclon.herokuapp.com/BigBasket/login/otp', payload, { withCredentials: true })
+    axios.post('http://localhost:8080/BigBasket/login/otp', payload, { withCredentials: true })
         .then((res) => {
             if ("login success" === res.data.message) {
                 localStorage.setItem("login","true")
@@ -129,7 +129,7 @@ export const OtpVerification = (payload, alert, navigate) => (dispatch) => {
 
 export const Increment_Products_Qty = (_id) => (dispatch) => {
     axios({
-        url: ` https://bigbasketclon.herokuapp.com/BigBasket/product/${_id}/increaseqty`,
+        url: ` http://localhost:8080/BigBasket/product/${_id}/increaseqty`,
         method: "GET",
         withCredentials: true
     }).then((res) => {
@@ -144,7 +144,7 @@ export const Increment_Products_Qty = (_id) => (dispatch) => {
 }
 export const Decrement_Products_Qty = (_id) => (dispatch) => {
     axios({
-        url: `https://bigbasketclon.herokuapp.com/BigBasket/product/${_id}/decreaseqty`,
+        url: `http://localhost:8080/BigBasket/product/${_id}/decreaseqty`,
         method: "GET",
         withCredentials: true
 
@@ -162,7 +162,7 @@ export const Decrement_Products_Qty = (_id) => (dispatch) => {
  
 export const Add_To_Cart=(_id,navigate,alert,isLogin)=>(dispatch)=>{
     axios({
-        url:`https://bigbasketclon.herokuapp.com/BigBasket/product/${_id}/addtocart`,
+        url:`http://localhost:8080/BigBasket/product/${_id}/addtocart`,
         method:"GET",
         withCredentials:true
     }).then((res)=>{
@@ -192,7 +192,7 @@ export const Add_To_Cart=(_id,navigate,alert,isLogin)=>(dispatch)=>{
 
 export const Logout=()=>(dispatch)=>{
     axios({
-        url:`https://bigbasketclon.herokuapp.com/BigBasket/logout`,
+        url:`http://localhost:8080/BigBasket/logout`,
         method:"GET",
     }).then((res)=>{
         if(res.data.message==="user loggedout successfully"){
