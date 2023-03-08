@@ -1,0 +1,109 @@
+/* *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  } */
+  hr{
+    margin: 1% 7%;
+  }
+.offerBtn {
+  display: flex;
+  /* border: solid; */
+  margin: 2% 7%;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.sectionHeading {
+  display: flex;
+  /* border: solid; */
+  justify-content: space-between;
+  width: 50%;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: 7%;
+}
+.sectionHeading p {
+  margin: 0;
+  font-size: 30px;
+}
+.sectionHeading button {
+  color: white;
+  background-color:#84c225 ;
+  border: none;
+  padding: 3px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.secHead {
+  margin-top: 50px;
+  font-size: 30px;
+}
+.staples {
+  display: grid;
+  grid-template-columns: repeat(6, 16%);
+  gap: 10px;
+  margin: auto 7%;
+}
+.staples > div {
+  border: solid 1px gainsboro;
+}
+.staples > div:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.staples img {
+  width: 100%;
+}
+
+.bigbasketstory {
+  text-align: left;
+  border: solid 1px gray;
+  margin: 3% 7%;
+  padding: 20px;
+  text-align: justify;
+  font-size: 15px;
+}
+.bigbasketstory p:first-child, #readmore {
+  font-size: 30px;
+  margin: 1% 0%;
+}
+
+.bigbasketstory span{
+  color: #84c225;
+  cursor: pointer;
+}
+
+@media (max-width:991px) {
+  .offerBtn img{
+    width: 85%;
+  }
+  .sectionHeading p {
+    margin: 0;
+    font-size: 25px;
+  }
+  .sectionHeading button{
+    font-size: 15px;
+  }
+  .secHead {
+    margin-top: 40px;
+    font-size: 25px;
+  }
+} 
+
+@media (max-width: 767px) {
+  .offerBtn img{
+    width: 90%;
+    font-weight: bold;
+  }
+  .sectionHeading p {
+    margin: 0;
+    font-size: 15px;
+  }
+  .sectionHeading button{
+    font-size: 10px;
+  }
+  .secHead {
+    margin-top: 30px;
+    font-size: 15px;
+  }
+ 
+}
