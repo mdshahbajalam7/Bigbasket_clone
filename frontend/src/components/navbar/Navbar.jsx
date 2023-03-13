@@ -7,34 +7,35 @@ import styles from "./navbar.module.css";
 
 export const Navbar = () => {
   const cart = useSelector((state) => state.Products?.CartData[0]?.cartItems.length);
-  console.log(cart,"cart");
   const [SearchText, setSearchText] = useState("")
-  const [login,setLogin]=useState(false)
- let isLogin=localStorage.getItem("login")
- const Auth=useSelector((state)=>state.Products.Auth)
-  console.log(Auth,"kkk");
- const dispatch=useDispatch()
- useEffect(()=>{
-  if(isLogin==="true"){
-    setLogin(true)
-  }
- },[isLogin, dispatch])
-  
- const handleLogout=()=>{
+  const [login, setLogin] = useState(false)
+  let isLogin = localStorage.getItem("login")
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isLogin === "true") {
+      setLogin(true)
+    }
+  }, [isLogin, dispatch])
+
+  const handleLogout = () => {
     dispatch(Logout())
- }
-  const navigate  = useNavigate()
-  const handleSearch =()=>{
+    navigate("/")
+  }
+  
+  const handleSearch = () => {
     console.log(SearchText);
   }
-  const handleSelect =(e)=>{
-      // console.log(e.target.value)
-      navigate("/products")
+  const handleSelect = (e) => {
+    navigate("/products")
   }
-  const handleCart=()=>{
+
+  const handleCart = () => {
     navigate("/cart")
   }
-  const Scrool =()=>{
+  
+  const Scrool = () => {
     window.scroll({
       top: 0,
       behavior: 'smooth'
@@ -44,8 +45,8 @@ export const Navbar = () => {
   return (
     <div>
       <div className={styles.navbar}>
-        <div onClick={()=>navigate("/")} id={styles.logo}>
-          <Image w={["70%","100%","100%"]} h={[50,]}
+        <div onClick={() => navigate("/")} id={styles.logo}>
+          <Image w={["70%", "100%", "100%"]} h={[50,]}
             src="https://64.media.tumblr.com/b0b0f04a44b92332a6c6343ac5bf1e96/3ff50a552f527619-c9/s400x600/d7effd42407109492412543fd1f3f1613c97483a.png"
             alt="bigbasket_logo"
           />
@@ -59,11 +60,11 @@ export const Navbar = () => {
               <i className="fa-solid fa-location-dot add"></i> 52125 Bengaluru
             </span>
             <span className={styles.login_main} >
-              <i className="fa-regular fa-user"></i> {!login?(<i onClick={()=>navigate("/login")}>login/signup</i>):(<i onClick={handleLogout}>Logout</i>)}
+              <i className="fa-regular fa-user"></i> {!login ? (<i onClick={() => navigate("/login")}>login/signup</i>) : (<i onClick={handleLogout}>Logout</i>)}
             </span>{" "}
             <span className={styles.login}>
               <i>
-              {!login?(<i onClick={()=>navigate("/login")}>login/signup</i>):(<i onClick={handleLogout}>Logout</i>)}
+                {!login ? (<i onClick={() => navigate("/login")}>login/signup</i>) : (<i onClick={handleLogout}>Logout</i>)}
               </i>
             </span>
             <div></div>
@@ -71,10 +72,10 @@ export const Navbar = () => {
           <div className={styles.search_cart}>
             <div className={styles.search_cart_inp}>
               <input
-              style={{outline:"solid 1px #84c225"}}
+                style={{ outline: "solid 1px #84c225" }}
                 type="text"
                 value={SearchText}
-                onChange={(e)=>setSearchText(e.target.value)}
+                onChange={(e) => setSearchText(e.target.value)}
                 placeholder="Search for products.."
               />
               <button onClick={handleSearch}>
@@ -88,7 +89,7 @@ export const Navbar = () => {
               <div>
                 <span >My Basket</span>
                 <br />
-                <span>{ cart} Item</span>
+                <span>{cart} Item</span>
               </div>
             </div>
           </div>

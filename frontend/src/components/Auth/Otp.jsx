@@ -9,13 +9,13 @@ import { useAlert } from 'react-alert';
 import { useNavigate } from 'react-router-dom';
 
 const Otp = () => {
-  const [otp,setOtp]=useState({})
+  const [otp,setOtp]=useState()
   const alert=useAlert()
   const navigate=useNavigate();
   let Number=localStorage.getItem("Number")
   const dispatch=useDispatch()
   const handleVerify=()=>{
-    dispatch(OtpVerification(otp,alert,navigate))
+    dispatch(OtpVerification(otp,alert,navigate,Number))
   }
   const handleClick=()=>{
     navigate("/login")
@@ -31,7 +31,7 @@ const Otp = () => {
             <Text style={{color:"#999"}}>Enter OTP</Text>
             <Flex pt={[10,15,20]} justify="center" align="center" w="full">
               <FormControl w={["70%","70%","70%","70%","70.5%"]}>
-                <OTPInput noInputs={4} onChange={(value) => setOtp({otp:value})} w={["80%","30%","30%","20%","24.5%"]}/>
+                <OTPInput noInputs={4} onChange={(value) => setOtp(value)} w={["80%","30%","30%","20%","24.5%"]}/>
               </FormControl>
             </Flex>
             <br />
@@ -39,7 +39,7 @@ const Otp = () => {
             <br/>
             
             <br />
-            <Button className='Signup'  style={{"width":"70%", margin:"auto",marginTop:"5%",backgroundColor:"rgb(162,208,90)"}} onClick={handleVerify}>Verify & Continue</Button>
+            <Button className='Signup'  style={{"width":"70%", margin:"auto",marginTop:"5%",backgroundColor:"rgb(162,208,90)"}} onClick={()=>handleVerify()}>Verify & Continue</Button>
         </FormControl>
     </Box>
   )

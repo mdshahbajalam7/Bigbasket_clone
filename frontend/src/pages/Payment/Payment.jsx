@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { GetCartData, } from "../../redux/actions/action";
+import { CartDataRemove, GetCartData, } from "../../redux/actions/action";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useAlert } from 'react-alert'
+import swal from 'sweetalert'
 
 import {
   Box,
@@ -13,15 +14,19 @@ import {
   FormHelperText,
   Input,
   Button,
+  useDisclosure,
+  Spinner,
 } from "@chakra-ui/react";
 import { Navigate, useNavigate } from "react-router";
+// import BasicUsage from "../BasicUsage";
 
 
 export const Payment = () => {
+  const alert = useAlert();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const total = useSelector((state) => state.Products.total);
-  console.log("total", total);
+  // console.log("total", total);
 
 
   useEffect(() => {
@@ -31,11 +36,28 @@ export const Payment = () => {
 
 
 
+
   const [input, setInput] = useState("");
   const isError = input === "";
   const [card, setCard] = useState("");
   const [cvv, setCVV] = useState("");
   const [year, setYear] = useState("");
+
+  const handleClickPayment = () => {
+    if (cvv == "" || year == "" || card == "") {
+      alert.error('Enter all Fields !')
+    } else {
+        swal({
+          title: "Payment is Successfull!",
+          icon: "success",
+          dangerMode: false,
+        })
+      dispatch(CartDataRemove())
+      setTimeout(() => {
+        navigate("/")
+      }, 4000)
+    }
+  }
   return (
     <Box width={"100%"}>
       <Box width={"75%"} margin="auto">
@@ -89,8 +111,10 @@ export const Payment = () => {
                   <Input
                     value={card}
                     id="number"
-                    type="number"
-                    fontSize={"12px"}
+                    type={'Number'}
+                    maxlength="16"
+                    maxLength={'16'}
+                    fontSize={"15px"}
                     fontWeight={300}
                     onChange={(e) => {
                       setCard(e.target.value);
@@ -122,7 +146,7 @@ export const Payment = () => {
                       </FormLabel>
                       <Input
                         type="number"
-                        fontSize={"12px"}
+                        fontSize={"15px"}
                         fontWeight={300}
                         onChange={(e) => {
                           setYear(e.target.value);
@@ -154,11 +178,13 @@ export const Payment = () => {
                         </FormLabel>
                         <Input
                           type="password"
-                          fontSize={"12px"}
+                          fontSize={"15px"}
                           fontWeight={300}
                           onChange={(e) => {
                             setCVV(e.target.value);
                           }}
+                          placeholder='CVV'
+                          maxLength={'3'}
                           variant={"outline"}
                           _hover={{ bg: "white" }}
                           _expanded={{ bg: "white" }}
@@ -189,14 +215,10 @@ export const Payment = () => {
                       borderRadius="0"
                       borderWidth="0.025px"
                       bg="#84c225"
-                      onClick={() => {
-                        if (cvv == "" || year == "" || card == "") {
-                          alert("Enter all Fields");
-                        } else {
-                          alert("Payment is Successfull!");
-                          navigate("/");
-                        }
-                      }}
+                      // onClick={() => {
+
+                      // }}
+                      onClick={handleClickPayment}
                     >
                       Place Order & Pay
                     </Button>

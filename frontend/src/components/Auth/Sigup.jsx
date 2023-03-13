@@ -32,7 +32,7 @@ const UserDetails = () => {
     }
   }
   if(Auth.message==="user created" && Auth.status==="success"){
-    navigate("/")
+    navigate("/login")
   }
   return (
     <Box>

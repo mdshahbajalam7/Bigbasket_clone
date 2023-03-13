@@ -22,21 +22,15 @@ export const Cart = () => {
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.Products?.CartData[0]?.cartItems);
     const total = useSelector((state) => state.Products.total);
-    console.log("total", total?.total);
-
-
-    console.log("cart", cart);
-    //   console.log(cart);
-
+    console.log("total", total);
 
     useEffect(() => {
         dispatch(GetCartData());
-
     }, [dispatch]);
+
     let saved = 0;
     return (
         <Box width="100%">
-            {/* <Topnavbar /> */}
             <Box width="75%" m={"auto"}>
                 <Box
                     width="100%"
@@ -44,7 +38,6 @@ export const Cart = () => {
                     p="1rem"
                     mt="1.5rem"
                     border="1px solid #e8e8e8"
-                // border="1px solid red"
                 >
                     <Text
                         fontSize={"24px"}
@@ -75,11 +68,7 @@ export const Cart = () => {
                             </Thead>
                             <Tbody>
                                 {cart?.map((e) => {
-                                    {
-                                        saved =
-                                            saved + (Math.floor(e.Price) - Math.floor(e.Price - (10 * e.Price) / 100));
-                                    }
-
+                                    { saved = saved + (Math.floor(e.Price - Math.floor(e.Price - (10 * e.Price) / 100)) * e.quantity) }
 
                                     return (
                                         <Tr>
@@ -112,17 +101,8 @@ export const Cart = () => {
                                                     +
                                                 </Button>
                                             </Td>
-                                            <Td>Rs  {Math.floor(e.Price - (10 * e.Price) / 100) * e.quantity}
-
-                                            </Td>
-                                            <Td>
-                                                {" "}
-                                                Rs{" "}
-                                                {Math.floor(
-                                                    e.Price - Math.floor(e.Price - (10 * e.Price) / 100))}
-                                            </Td>
-                                            <Td>
-                                            </Td>
+                                            <Td>Rs {Math.floor(e.Price - (10 * e.Price) / 100) * e.quantity}</Td>
+                                            <Td>Rs {Math.floor(e.Price - Math.floor(e.Price - (10 * e.Price) / 100)) * e.quantity}</Td>
                                         </Tr>
                                     );
                                 })}
@@ -144,16 +124,16 @@ export const Cart = () => {
                                 fontWeight={400}
                             >
                                 <Box>
-                                    <Text>rs</Text>
+                                    <Text>Rs. 50</Text>
                                     <Text>Delivery Charges</Text>
                                 </Box>
                                 <Box>
-                                    <Text>Rs</Text>
-                                    <Text>***</Text>
+                                    <Text>Rs.</Text>
+                                    <Text>{(total - saved)}</Text>
                                 </Box>
                                 <Box borderLeft={"1px solid #e8e8e8"} color="red" pl="2px">
                                     <Text>You saved!</Text>
-                                    <Text>Rs</Text>
+                                    <Text>Rs {saved}</Text>
                                 </Box>
                             </Flex>
                             <Flex
@@ -166,7 +146,7 @@ export const Cart = () => {
 
                                 </Heading>
                                 <Heading as={"h6"} fontWeight="250">
-                                    ₹{total}
+                                    ₹ {total - saved + 50}
                                 </Heading>
                             </Flex>
                             <Box float={"right"}>
@@ -176,7 +156,7 @@ export const Cart = () => {
                                         if (cart.length !== 0) {
                                             navigate("/address");
                                         } else {
-                                            alert(
+                                            alert.warning(
                                                 "Your Cart is Empty, Please Add items into cart and after check it out"
                                             );
                                             navigate("/product");

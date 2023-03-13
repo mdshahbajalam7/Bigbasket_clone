@@ -29,6 +29,7 @@
     "redux-thunk": "^2.4.1",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.5",
+    "sweetalert": "^2.1.2",
     "thunk": "^0.0.1",
     "web-vitals": "^2.1.4"
   },
